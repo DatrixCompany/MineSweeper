@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const GameLayout = styled.div``;
 
 export const ControlsLayout = styled.div`
-  width: 40rem;
+  width: 400px;
   margin: 5rem auto;
 `;
 

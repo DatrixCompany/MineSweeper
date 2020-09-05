@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import Controls from './Controls';
 import Grid from './Grid';
+import VirtualGrid from './VirtualGrid';
 import { GameLayout } from './styled';
 import {
   MODES,
@@ -20,6 +21,7 @@ const initialState = {
   gridData: [[]],
   gridState: [[]],
   isShiftDown: false,
+  isVirtualGrid: true,
 };
 
 const ACTIONS = {
@@ -27,6 +29,7 @@ const ACTIONS = {
   SHIFT_DOWN: 'shift_down',
   GAME_MODE: 'game_mode',
   CELL_CLICK: 'cell_click',
+  TOGGLE_VIRTUAL: 'toggle_virtual',
 };
 
 const reducer = (state, { type, payload }) => {
@@ -81,6 +84,8 @@ const reducer = (state, { type, payload }) => {
         return { ...state, gridState: newGridState, mode: didLose ? MODES.LOST : MODES.PLAYING };
       }
     }
+    case ACTIONS.TOGGLE_VIRTUAL:
+      return { ...state, isVirtualGrid: !state.isVirtualGrid };
     default:
       return state;
   }
@@ -88,7 +93,7 @@ const reducer = (state, { type, payload }) => {
 
 const Game = () => {
   const [state, dispath] = useReducer(reducer, initialState);
-  const { flags, gridData, gridState, settings, mode } = state;
+  const { flags, gridData, gridState, settings, mode, isVirtualGrid } = state;
 
   const handleNewGame = (settings = defaultSettings) => {
     const [errorMessage, newSettings] = validateSettings(settings);
@@ -114,6 +119,8 @@ const Game = () => {
   const handleCellClick = (corX, corY) => {
     dispath({ type: ACTIONS.CELL_CLICK, payload: [corX, corY] });
   };
+
+  const toggleVirtual = () => dispath({ type: ACTIONS.TOGGLE_VIRTUAL });
 
   const handleKeyDown = (e) => {
     if (e.key === 'Shift') {
@@ -143,13 +150,18 @@ const Game = () => {
         mines={settings.mines}
         mode={mode}
         onNewGame={handleNewGame}
+        toggleVirtual={toggleVirtual}
       />
-      <Grid
-        width={settings.width}
-        gridData={gridData}
-        gridState={gridState}
-        onCellClick={handleCellClick}
-      />
+      {isVirtualGrid ? (
+        <VirtualGrid gridData={gridData} gridState={gridState} onCellClick={handleCellClick} />
+      ) : (
+        <Grid
+          width={settings.width}
+          gridData={gridData}
+          gridState={gridState}
+          onCellClick={handleCellClick}
+        />
+      )}
     </GameLayout>
   );
 };

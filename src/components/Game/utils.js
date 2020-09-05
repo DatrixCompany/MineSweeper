@@ -10,7 +10,7 @@ export const CELL_STATE = {
   FLAGGED: -1,
 };
 
-export const defaultSettings = { width: 10, height: 10, mines: 5, isSuperman: false };
+export const defaultSettings = { width: 50, height: 50, mines: 200, isSuperman: false };
 
 const formatSettings = ({ width, height, mines, isSuperman }) => {
   return { width: Number(width), height: Number(height), mines: Number(mines), isSuperman };
@@ -20,7 +20,7 @@ export const validateSettings = (settings) => {
   const { width, height, mines, isSuperman } = formatSettings(settings);
   const isValidWidth = width > 0 && width <= 300;
   const isValidHeight = height > 0 && height <= 300;
-  const isValidMines = mines > 0 && mines <= 90000 && mines <= width * height;
+  const isValidMines = mines > 0 && mines <= width * height;
   const isValid = isValidWidth && isValidHeight && isValidMines;
   const error = isValid ? false : 'Allowed Settings: Height, Width up to 300, mines up to 90,000';
   return [error, { width, height, mines, isSuperman }];
