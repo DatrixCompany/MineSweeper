@@ -6,7 +6,14 @@ import { ROUTES } from '../../utils';
 import { StyledControls, ControlsLayout } from './styled';
 import { MODES, defaultSettings } from './utils';
 
-const Controls = ({ mode = MODES.PLAYING, onNewGame, usedFlags = 0, mines = 0, toggleVirtual }) => {
+const Controls = ({
+  mode = MODES.PLAYING,
+  onNewGame,
+  usedFlags = 0,
+  mines = 0,
+  toggleVirtual,
+  isVirtual,
+}) => {
   const history = useHistory();
   const [settings, setSettings] = useState(defaultSettings);
 
@@ -53,7 +60,7 @@ const Controls = ({ mode = MODES.PLAYING, onNewGame, usedFlags = 0, mines = 0, t
         <div>
           <span>{`${mines} 💣 Total`}</span>
         </div>
-        <Button label="Virtual" onClick={toggleVirtual} />
+        <Button label={`Virtual: ${isVirtual ? 'On' : 'Off'}`} onClick={toggleVirtual} />
       </StyledControls>
     </ControlsLayout>
   );
@@ -65,6 +72,7 @@ Controls.propTypes = {
   usedFlags: PropTypes.number.isRequired,
   onNewGame: PropTypes.func.isRequired,
   toggleVirtual: PropTypes.func.isRequired,
+  isVirtual: PropTypes.bool.isRequired,
 };
 
 export default Controls;

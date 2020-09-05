@@ -151,6 +151,7 @@ const Game = () => {
         mode={mode}
         onNewGame={handleNewGame}
         toggleVirtual={toggleVirtual}
+        isVirtual={isVirtualGrid}
       />
       {isVirtualGrid ? (
         <VirtualGrid gridData={gridData} gridState={gridState} onCellClick={handleCellClick} />
