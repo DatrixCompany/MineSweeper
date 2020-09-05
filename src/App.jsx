@@ -6,10 +6,10 @@ import { ROUTES } from './utils';
 const App = () => {
   return (
     <Switch>
-      <Route path={'/MinesWeeper/' + ROUTES.PLAY}>
+      <Route path={ROUTES.PLAY}>
         <Game />
       </Route>
-      <Route path={'/MinesWeeper/' + ROUTES.BASE}>
+      <Route path={ROUTES.BASE}>
         <OnBoard />
       </Route>
     </Switch>
