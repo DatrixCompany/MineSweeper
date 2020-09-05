@@ -1,4 +1,4 @@
 export const ROUTES = {
-  BASE: '',
-  PLAY: '/play',
+  BASE: '/MineSweeper/',
+  PLAY: '/MineSweeper/play',
 };

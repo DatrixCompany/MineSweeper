@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Game, OnBoard } from './components/';
 import { ROUTES } from './utils';
 
@@ -12,6 +12,7 @@ const App = () => {
       <Route path={ROUTES.BASE}>
         <OnBoard />
       </Route>
+      <Redirect to={ROUTES.BASE} />
     </Switch>
   );
 };
