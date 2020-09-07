@@ -6,7 +6,8 @@ import Cell from './Cell';
 const VirtualGrid = ({ gridData = [[]], gridState = [[]], onCellClick }) => {
   const height = window.innerHeight - 400;
   const width = window.innerWidth;
-  const length = Math.min(height, width);
+  const boxed = Math.min(height, width);
+  const length = Math.max(boxed, 300);
   return (
     <Grid
       cellRenderer={({ key, rowIndex, columnIndex, style }) => {
@@ -28,7 +29,7 @@ const VirtualGrid = ({ gridData = [[]], gridState = [[]], onCellClick }) => {
       rowHeight={30}
       height={length}
       width={length}
-      style={{ margin: '0 auto' }}
+      style={{ margin: '0 auto', overflow: 'scroll' }}
     />
   );
 };
